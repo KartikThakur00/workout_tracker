@@ -1,0 +1,47 @@
+<div class="pt-20 flex justify-between px-2 gap-10 w-full">
+    <mat-form-field class=" flex-1 ">
+        <input matInput type="text" [(ngModel)]="searchName" (input)="searchUser()" placeholder="Search by name..." />
+    </mat-form-field>
+    <mat-form-field class=" flex-1 ">
+        <mat-label for="type">Workout Type</mat-label>
+        <mat-select id="type" [(ngModel)]="filterType" (selectionChange)="filterUsers()">
+            <mat-option value="All">All</mat-option>
+            <mat-option value="Running">Running</mat-option>
+            <mat-option value="Cycling">Cycling</mat-option>
+            <mat-option value="Swimming">Swimming</mat-option>
+            <mat-option value="Yoga">Yoga</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div class="px-2">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="workouts">
+            <th mat-header-cell *matHeaderCellDef>Workouts</th>
+            <td mat-cell *matCellDef="let element">
+                <div class="flex">
+                    <p *ngFor="let workout of element.workouts;let isFirst=first">
+                        <span *ngIf="!isFirst">, </span> {{workout}}
+                    </p>
+                </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="numberOfWorkouts">
+            <th mat-header-cell *matHeaderCellDef>Number of Workouts</th>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.workouts.length}} </td>
+        </ng-container>
+        <ng-container matColumnDef="totalWorkoutMinutes">
+            <th mat-header-cell *matHeaderCellDef>Total Workout Minutes</th>
+            <td mat-cell *matCellDef="let element">
+                {{element.totalWorkoutMinutes}}
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10,20]" showFirstLastButtons></mat-paginator>
+</div>

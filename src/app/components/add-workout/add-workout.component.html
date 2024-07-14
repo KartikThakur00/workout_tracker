@@ -1,0 +1,33 @@
+<form [formGroup]="workoutForm" (ngSubmit)="onSubmit()" class="w-full h-screen flex items-center justify-center">
+    <div>
+        <div>
+            <mat-form-field>
+                <mat-label for="name" class="font-medium">User Name</mat-label>
+                <input matInput id="name" formControlName="name" type="text"
+                    class="p-2 border border-solid border-[#ccc] rounded" />
+            </mat-form-field>
+        </div>
+        <div class="flex flex-wrap gap-4 ">
+
+            <div>
+                <mat-form-field>
+                    <mat-label for="type" class="font-medium">Workout Type</mat-label>
+                    <mat-select id="type" formControlName="type">
+                        <mat-option value="Running">Running</mat-option>
+                        <mat-option value="Cycling">Cycling</mat-option>
+                        <mat-option value="Swimming">Swimming</mat-option>
+                        <mat-option value="Yoga">Yoga</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label for="minutes" class="font-medium">Workout Minutes</mat-label>
+                    <input matInput id="minutes" formControlName="minutes" type="number"
+                        class="p-2 border border-solid border-[#ccc] rounded" />
+                </mat-form-field>
+            </div>
+        </div>
+        <button mat-raised-button type="submit">Add Workout</button>
+    </div>
+</form>
